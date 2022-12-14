@@ -1,9 +1,11 @@
 package com.pb.controllers;
 
 import com.pb.dto.PaymentDto;
-import com.pb.service.PaymentService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pb.service.IPaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author @bkalika
@@ -11,14 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/payments")
 public class PaymentController {
-    private final PaymentService paymentService;
+    private final IPaymentService paymentService;
 
-    public PaymentController(PaymentService paymentService) {
+    @Autowired
+    public PaymentController(IPaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
-    @RequestMapping
-    public PaymentDto getPaymentById() {
-        return paymentService.getPaymentByIdClient();
+    @GetMapping()
+    public List<PaymentDto> getPaymentsBySender(
+            @RequestParam(value = "filterBy", defaultValue = "15") Integer filterBy
+    ) {
+        return null;
     }
 }

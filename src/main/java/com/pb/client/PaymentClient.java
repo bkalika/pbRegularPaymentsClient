@@ -3,28 +3,41 @@ package com.pb.client;
 import com.pb.dto.PaymentDto;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Component;
 
-import java.net.URI;
+import java.util.List;
 
 /**
  * @author @bkalika
  */
 @Component
 public class PaymentClient {
-    HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-
-    HttpClient httpClient = httpClientBuilder.build();
-    HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
+    private final HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+    private final HttpClient httpClient = httpClientBuilder.build();
+    private final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
     private final RestTemplate restTemplate = new RestTemplate(factory);
 
-    public PaymentDto getPaymentById() {
-        String url = "http://localhost:8080/v1/payments/1015";
+    public List<PaymentDto> getAllPayments() {
+        String url = "http://localhost:8080/v1/payments";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("accept", "application/json");
+        HttpEntity<PaymentDto> requestEntity = new HttpEntity<>(null, headers);
 
         try {
-            return restTemplate.getForObject(new URI(url), PaymentDto.class);
+            ResponseEntity<List<PaymentDto>> response = restTemplate.exchange(url,
+                    HttpMethod.GET,
+                    requestEntity,
+                    new ParameterizedTypeReference<>() {
+                    });
+            return response.getBody();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

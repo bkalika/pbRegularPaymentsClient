@@ -51,4 +51,15 @@ public class ReceiverDto {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "ReceiverDto{" +
+                "id=" + id +
+                ", iban='" + iban + '\'' +
+                ", mfo=" + mfo +
+                ", okpo=" + okpo +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

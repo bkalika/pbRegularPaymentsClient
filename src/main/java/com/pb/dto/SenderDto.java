@@ -44,4 +44,14 @@ public class SenderDto {
     public void setInn(Long inn) {
         this.inn = inn;
     }
+
+    @Override
+    public String toString() {
+        return "SenderDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", inn=" + inn +
+                '}';
+    }
 }

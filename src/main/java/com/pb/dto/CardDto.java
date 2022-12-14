@@ -34,4 +34,13 @@ public class CardDto {
     public void setNumber(Long number) {
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return "CardDto{" +
+                "id=" + id +
+                ", ownerDto=" + ownerDto +
+                ", number=" + number +
+                '}';
+    }
 }

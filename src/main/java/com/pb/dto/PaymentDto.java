@@ -55,4 +55,15 @@ public class PaymentDto {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "PaymentDto{" +
+                "id=" + id +
+                ", cardDto=" + cardDto +
+                ", receiverDto=" + receiverDto +
+                ", period=" + period +
+                ", amount=" + amount +
+                '}';
+    }
 }
