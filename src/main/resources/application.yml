@@ -1,0 +1,5 @@
+## Port
+server.port: 8086
+#spring:
+#  jackson:
+#    property-naming-strategy: SNAKE_CASE
