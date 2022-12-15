@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "983aecbb-c46e-48b9-9756-d977d1a2b695",
+		"name": "PBRegularPaymentsClient",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16550994"
+	},
+	"item": [
+		{
+			"name": "payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/v1/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments?filterBySenderInn=1234567920",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/v1/payments?filterBySenderInn=1234567920",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"v1",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "filterBySenderInn",
+							"value": "1234567920"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments?filterByReceiverOkpo=878788",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/v1/payments?filterByReceiverOkpo=878788",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"v1",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "filterByReceiverOkpo",
+							"value": "878788"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "journals?paymentId=1014",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/v1/journals?paymentId=1014",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"v1",
+						"journals"
+					],
+					"query": [
+						{
+							"key": "paymentId",
+							"value": "1014"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

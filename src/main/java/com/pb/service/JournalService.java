@@ -28,11 +28,11 @@ public class JournalService implements IJournalService {
         List<JournalDto> journalToWrite = new ArrayList<>();
 
         for(PaymentDto payment : payments) {
-            JournalDto lastJournalsByPayment = journalClient.getJournalsByPayment(payment.getId()).stream()
+            JournalDto lastJournalsByPayment = journalClient.getJournals(payment.getId()).stream()
                     .max(Comparator.comparing(JournalDto::getTime)).filter(j -> j.getStatus() != PaymentStatus.STORNIRE).orElse(new JournalDto());
 
             currentTime = LocalDateTime.now();
-            if(journalClient.getJournalsByPayment(payment.getId()).isEmpty()) {
+            if(journalClient.getJournals(payment.getId()).isEmpty()) {
                 lastJournalsByPayment.setPayment_dto(payment);
                 lastJournalsByPayment.setTime(currentTime);
                 lastJournalsByPayment.setStatus(PaymentStatus.ACTIVE);
@@ -48,5 +48,10 @@ public class JournalService implements IJournalService {
 
     public void createJournal(JournalDto journalDto) {
         journalClient.sendToJournal(journalDto);
+    }
+
+    @Override
+    public List<JournalDto> getJournals(Long paymentId) {
+        return journalClient.getJournals(paymentId);
     }
 }

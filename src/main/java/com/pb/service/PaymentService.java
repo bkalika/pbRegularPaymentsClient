@@ -17,8 +17,8 @@ public class PaymentService implements IPaymentService {
         this.paymentClient = paymentClient;
     }
 
-    public List<PaymentDto> getPayments() {
-        return paymentClient.getAllPayments();
+    public List<PaymentDto> getPayments(String filterBySenderInn, String filterByReceiverOkpo) {
+        return paymentClient.getAllPayments(filterBySenderInn, filterByReceiverOkpo);
     }
 
     @Override

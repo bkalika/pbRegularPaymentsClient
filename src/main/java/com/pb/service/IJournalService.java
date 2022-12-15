@@ -11,4 +11,5 @@ import java.util.List;
 public interface IJournalService {
     List<JournalDto> getAllJournalsWaitingFor(List<PaymentDto> payments);
     void createJournal(JournalDto journalDto);
+    List<JournalDto> getJournals(Long paymentId);
 }

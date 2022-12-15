@@ -21,9 +21,10 @@ public class PaymentController {
     }
 
     @GetMapping()
-    public List<PaymentDto> getPaymentsBySender(
-            @RequestParam(value = "filterBy", defaultValue = "sender") Integer filterBy
+    public List<PaymentDto> getPaymentsBySenderOrReceiver(
+            @RequestParam(value = "filterBySenderInn", required = false) String filterBySenderInn,
+            @RequestParam(value = "filterByReceiverOkpo", required = false) String filterByReceiverOkpo
     ) {
-        return null;
+        return paymentService.getPayments(filterBySenderInn, filterByReceiverOkpo);
     }
 }

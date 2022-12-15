@@ -21,7 +21,7 @@ public class JournalClient {
     private final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
     private final RestTemplate restTemplate = new RestTemplate(factory);
 
-    public List<JournalDto> getJournalsByPayment(Long id) {
+    public List<JournalDto> getJournals(Long id) {
         return exchangeGetMethod(String.format("http://localhost:8080/v1/journals/journals-by-payments/%s", id));
     }
 

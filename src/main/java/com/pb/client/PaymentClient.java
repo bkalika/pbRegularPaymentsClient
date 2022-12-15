@@ -24,15 +24,20 @@ public class PaymentClient {
     private final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
     private final RestTemplate restTemplate = new RestTemplate(factory);
 
-    public List<PaymentDto> getAllPayments() {
-        String url = "http://localhost:8080/v1/payments";
+    public List<PaymentDto> getAllPayments(String filterBySenderInn, String filterByReceiverOkpo) {
+        StringBuilder url = new StringBuilder("http://localhost:8080/v1/payments");
+        if(filterBySenderInn != null) {
+            url.append("/payments-by-inn/").append(filterBySenderInn);
+        } else if(filterByReceiverOkpo != null) {
+            url.append("/payments-by-okpo/").append(filterByReceiverOkpo);
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("accept", "application/json");
         HttpEntity<PaymentDto> requestEntity = new HttpEntity<>(null, headers);
 
         try {
-            ResponseEntity<List<PaymentDto>> response = restTemplate.exchange(url,
+            ResponseEntity<List<PaymentDto>> response = restTemplate.exchange(url.toString(),
                     HttpMethod.GET,
                     requestEntity,
                     new ParameterizedTypeReference<>() {

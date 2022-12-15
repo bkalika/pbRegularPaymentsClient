@@ -25,7 +25,7 @@ public class SchedulerEngineService {
     @SchedulerLock(name = "debitingScheduledTask")
     public void runDebiting() {
         System.out.println("runDebiting is start to working");
-                List<PaymentDto> payments = paymentService.getPayments();
+                List<PaymentDto> payments = paymentService.getPayments(null, null);
                 List<JournalDto> all = journalService.getAllJournalsWaitingFor(payments);
                 for(JournalDto journal : all) {
                     journalService.createJournal(journal);
