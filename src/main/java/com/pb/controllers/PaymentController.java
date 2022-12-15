@@ -22,7 +22,7 @@ public class PaymentController {
 
     @GetMapping()
     public List<PaymentDto> getPaymentsBySender(
-            @RequestParam(value = "filterBy", defaultValue = "15") Integer filterBy
+            @RequestParam(value = "filterBy", defaultValue = "sender") Integer filterBy
     ) {
         return null;
     }

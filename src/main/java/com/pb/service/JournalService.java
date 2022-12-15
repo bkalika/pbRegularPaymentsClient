@@ -16,40 +16,14 @@ import java.util.List;
  * @author @bkalika
  */
 @Service
-public class JournalService {
+public class JournalService implements IJournalService {
     private final JournalClient journalClient;
-    private final PaymentService paymentService;
 
-    public JournalService(JournalClient journalClient, PaymentService paymentService) {
+    public JournalService(JournalClient journalClient) {
         this.journalClient = journalClient;
-        this.paymentService = paymentService;
     }
 
-    public void checkDebiting() {
-        try {
-            LocalDateTime start;
-            LocalDateTime end;
-            long actionTime;
-
-            while(true) {
-                start = LocalDateTime.now();
-                List<PaymentDto> payments = paymentService.getPayments();
-                List<JournalDto> all = getAllJournalsWaitingFor(payments);
-                for(JournalDto journal : all) {
-                    journalClient.sendToJournal(journal);
-                }
-
-                end = LocalDateTime.now();
-                actionTime = ChronoUnit.MINUTES.between(end, start);
-
-                Thread.sleep(60_000 - actionTime);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private List<JournalDto> getAllJournalsWaitingFor(List<PaymentDto> payments) {
+    public List<JournalDto> getAllJournalsWaitingFor(List<PaymentDto> payments) {
         LocalDateTime currentTime;
         List<JournalDto> journalToWrite = new ArrayList<>();
 
@@ -70,5 +44,9 @@ public class JournalService {
             }
         }
         return journalToWrite;
+    }
+
+    public void createJournal(JournalDto journalDto) {
+        journalClient.sendToJournal(journalDto);
     }
 }

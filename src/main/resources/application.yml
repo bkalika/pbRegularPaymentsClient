@@ -1,5 +1,22 @@
 ## Port
 server.port: 8086
-#spring:
-#  jackson:
-#    property-naming-strategy: SNAKE_CASE
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pb_payments
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      platform: postgres
+      mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+scheduler:
+  enabled: true
+interval: PT01M
